@@ -4,11 +4,12 @@
         "KEY_TEMPERATURE": 0
     },
     "capabilities": [
-        "location"
+        "location",
+        "health"
     ],
     "companyName": "Pebble",
     "enableMultiJS": false,
-    "longName": "Tutorial-3-3",
+    "longName": "intotoface",
     "projectType": "native",
     "resources": {
         "media": [
@@ -32,7 +33,10 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "Tutorial-3-3",
+    "shortName": "intotoface",
+    "targetPlatforms": [
+        "aplite"
+    ],
     "uuid": "3e69108b-615e-4f5a-8180-47fd6a9c3be6",
     "versionLabel": "1.0",
     "watchapp": {
