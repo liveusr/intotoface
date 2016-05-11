@@ -20,7 +20,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     // Assemble full string and display
     snprintf(weather_layer_buffer, sizeof(weather_layer_buffer), "%s, %s", temperature_buffer, conditions_buffer);
     //text_layer_set_text(s_weather_layer, weather_layer_buffer);
-    APP_LOG(APP_LOG_LEVEL_ERROR, "Message received! %s %s", temperature_buffer, conditions_buffer);
+    APP_LOG(APP_LOG_LEVEL_INFO, "Message received! %s %s", temperature_buffer, conditions_buffer);
   }
 }
 
@@ -34,6 +34,19 @@ static void outbox_failed_callback(DictionaryIterator *iterator, AppMessageResul
 
 static void outbox_sent_callback(DictionaryIterator *iterator, void *context) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
+}
+
+void send_js_message(int id)
+{
+  // Begin dictionary
+  DictionaryIterator *iter;
+  app_message_outbox_begin(&iter);
+
+  // Add a key-value pair
+  dict_write_uint8(iter, KEY_REQUEST, id);
+
+  // Send the message!
+  app_message_outbox_send();
 }
 
 void js_interface_init(void)

@@ -1,7 +1,8 @@
 {
     "appKeys": {
-        "KEY_CONDITIONS": 1,
-        "KEY_TEMPERATURE": 0
+        "KEY_CONDITIONS": 2,
+        "KEY_REQUEST": 0,
+        "KEY_TEMPERATURE": 1
     },
     "capabilities": [
         "location",
