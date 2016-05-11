@@ -5,7 +5,8 @@
 static TextLayer *s_time_layer;
 static GFont s_time_font;
 
-void update_time(void) {
+void update_time(void) 
+{
   // Get a tm structure
   time_t temp = time(NULL); 
   struct tm *tick_time = localtime(&temp);
@@ -47,6 +48,7 @@ void deinit_time_layer(void)
 {
   // Destroy TextLayer
   text_layer_destroy(s_time_layer);
+  
   // Unload GFont
   fonts_unload_custom_font(s_time_font);
 }
