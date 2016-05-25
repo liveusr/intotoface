@@ -15,21 +15,46 @@
     "resources": {
         "media": [
             {
-                "file": "images/background.png",
-                "name": "IMAGE_BACKGROUND",
+                "file": "images/ind_flag_icon.png",
+                "name": "IMAGE_IND_FLAG",
+                "targetPlatforms": null,
                 "type": "bitmap"
             },
             {
-                "compatibility": "2.7",
-                "file": "fonts/perfect-dos-vga.ttf",
-                "name": "FONT_PERFECT_DOS_20",
+                "file": "images/deu_flag_icon.png",
+                "name": "IMAGE_DEU_FLAG",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "images/calendar_icon.png",
+                "name": "IMAGE_CALENDAR",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "images/battery_icon.png",
+                "name": "IMAGE_BATTERY",
+                "targetPlatforms": null,
+                "type": "bitmap"
+            },
+            {
+                "file": "fonts/LEngineer-Regular.otf",
+                "name": "FONT_LENGINEER_70",
+                "targetPlatforms": null,
                 "type": "font"
             },
             {
-                "compatibility": "2.7",
-                "file": "fonts/perfect-dos-vga.ttf",
-                "name": "FONT_PERFECT_DOS_48",
+                "file": "fonts/LEngineer-Regular.otf",
+                "name": "FONT_LENGINEER_60",
+                "targetPlatforms": null,
                 "type": "font"
+            },
+            {
+                "file": "images/background.png",
+                "name": "IMAGE_BACKGROUND",
+                "targetPlatforms": null,
+                "type": "bitmap"
             }
         ]
     },

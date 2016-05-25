@@ -11,17 +11,17 @@ static GBitmap *s_background_bitmap;
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) 
 {
-  update_time();
+  //update_time();
   // Get weather update every 30 minutes
   if(tick_time->tm_min % 30 == 0) {
-    send_js_message(2);
+    //send_js_message(2);
   }
-  send_js_message(1);
+  //send_js_message(1);
 }
 
 static void show_launch_sreen(void)
 {
-  update_time();
+  //update_time();
 }
 
 static void init_background_layer(Layer *window_layer)
@@ -35,8 +35,8 @@ static void init_background_layer(Layer *window_layer)
   s_background_layer = bitmap_layer_create(bounds);
 
   // Set the bitmap onto the layer and add to the window
-  bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
-  layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
+  //bitmap_layer_set_bitmap(s_background_layer, s_background_bitmap);
+  //layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
 }
 
 static void deinit_background_layer(void)

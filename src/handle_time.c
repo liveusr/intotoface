@@ -5,6 +5,15 @@
 static TextLayer *s_time_layer;
 static GFont s_time_font;
 
+static BitmapLayer *s_calendar_layer;
+static GBitmap *s_calendar_bitmap;
+
+static BitmapLayer *s_deu_flag_layer;
+static GBitmap *s_deu_flag_bitmap;
+
+static BitmapLayer *s_ind_flag_layer;
+static GBitmap *s_ind_flag_bitmap;
+
 void update_time(void) 
 {
   // Get a tm structure
@@ -19,6 +28,83 @@ void update_time(void)
   text_layer_set_text(s_time_layer, s_buffer);
 }
 
+static void init_calendar(Layer *window_layer)
+{
+  GRect bounds = layer_get_bounds(window_layer);
+  GRect image_bounds;
+
+  // Create GBitmap
+  s_calendar_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_CALENDAR);
+  image_bounds = gbitmap_get_bounds(s_calendar_bitmap);
+
+  // Create BitmapLayer to display the GBitmap
+  s_calendar_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 20, image_bounds.size.w, image_bounds.size.h));
+
+  // Set the bitmap onto the layer and add to the window
+  bitmap_layer_set_bitmap(s_calendar_layer, s_calendar_bitmap);
+  layer_add_child(window_layer, bitmap_layer_get_layer(s_calendar_layer));
+}
+
+static void deinit_calendar(void)
+{
+  // Destroy GBitmap
+  gbitmap_destroy(s_calendar_bitmap);
+
+  // Destroy BitmapLayer
+  bitmap_layer_destroy(s_calendar_layer);
+}
+
+static void init_deu_flag(Layer *window_layer)
+{
+  GRect bounds = layer_get_bounds(window_layer);
+  GRect image_bounds;
+
+  // Create GBitmap
+  s_deu_flag_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_DEU_FLAG);
+  image_bounds = gbitmap_get_bounds(s_deu_flag_bitmap);
+
+  // Create BitmapLayer to display the GBitmap
+  s_deu_flag_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 86, image_bounds.size.w, image_bounds.size.h));
+
+  // Set the bitmap onto the layer and add to the window
+  bitmap_layer_set_bitmap(s_deu_flag_layer, s_deu_flag_bitmap);
+  layer_add_child(window_layer, bitmap_layer_get_layer(s_deu_flag_layer));
+}
+
+static void deinit_deu_flag(void)
+{
+  // Destroy GBitmap
+  gbitmap_destroy(s_deu_flag_bitmap);
+
+  // Destroy BitmapLayer
+  bitmap_layer_destroy(s_deu_flag_layer);
+}
+
+static void init_ind_flag(Layer *window_layer)
+{
+  GRect bounds = layer_get_bounds(window_layer);
+  GRect image_bounds;
+
+  // Create GBitmap
+  s_ind_flag_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_IND_FLAG);
+  image_bounds = gbitmap_get_bounds(s_ind_flag_bitmap);
+
+  // Create BitmapLayer to display the GBitmap
+  s_ind_flag_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 130, image_bounds.size.w, image_bounds.size.h));
+
+  // Set the bitmap onto the layer and add to the window
+  bitmap_layer_set_bitmap(s_ind_flag_layer, s_ind_flag_bitmap);
+  layer_add_child(window_layer, bitmap_layer_get_layer(s_ind_flag_layer));
+}
+
+static void deinit_ind_flag(void)
+{
+  // Destroy GBitmap
+  gbitmap_destroy(s_ind_flag_bitmap);
+
+  // Destroy BitmapLayer
+  bitmap_layer_destroy(s_ind_flag_layer);
+}
 
 void init_time_layer(Layer *window_layer)
 {
@@ -26,22 +112,27 @@ void init_time_layer(Layer *window_layer)
   
   // Create the TextLayer with specific bounds
   s_time_layer = text_layer_create(
-      GRect(0, PBL_IF_ROUND_ELSE(58, 52), bounds.size.w, 50));
+      GRect(5, PBL_IF_ROUND_ELSE(58, 82), bounds.size.w - 40, 80));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_time_layer, GColorClear);
-  text_layer_set_text_color(s_time_layer, GColorBlack);
-  text_layer_set_text(s_time_layer, "00:00");
+  text_layer_set_text_color(s_time_layer, GColorWhite);
+  text_layer_set_text(s_time_layer, "Chinchwad");
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
 
   // Create GFont
-  s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_PERFECT_DOS_48));
+  s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_60));
 
   // Apply to TextLayer
-  text_layer_set_font(s_time_layer, s_time_font);
+  //text_layer_set_font(s_time_layer, s_time_font);
+  text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
 
   // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
+  
+  init_calendar(window_layer);
+  init_deu_flag(window_layer);
+  init_ind_flag(window_layer);
 }
 
 void deinit_time_layer(void)
@@ -51,4 +142,8 @@ void deinit_time_layer(void)
   
   // Unload GFont
   fonts_unload_custom_font(s_time_font);
+  
+  deinit_calendar();
+  deinit_deu_flag();
+  deinit_ind_flag();
 }
