@@ -8,15 +8,18 @@ static GFont s_loc_time_h_font;
 static TextLayer *s_loc_time_m_layer;
 static GFont s_loc_time_m_font;
 
+static BitmapLayer *s_calendar_layer;
+static GBitmap *s_calendar_bitmap;
+
 static TextLayer *s_cal_month_layer;
 static TextLayer *s_cal_date_layer;
 static TextLayer *s_cal_day_layer;
 
-static BitmapLayer *s_calendar_layer;
-static GBitmap *s_calendar_bitmap;
-
 static BitmapLayer *s_deu_flag_layer;
 static GBitmap *s_deu_flag_bitmap;
+
+static TextLayer *s_deu_time_h_layer;
+static TextLayer *s_deu_time_m_layer;
 
 static BitmapLayer *s_ind_flag_layer;
 static GBitmap *s_ind_flag_bitmap;
@@ -245,6 +248,54 @@ void deinit_cal_day(void)
   text_layer_destroy(s_cal_day_layer);
 }
 
+void init_deu_time_h(Layer *window_layer)
+{
+  // Create the TextLayer with specific bounds
+  s_deu_time_h_layer = text_layer_create(GRect(113, 105, 16, 18));
+
+  // Improve the layout to be more like a watchface
+  text_layer_set_background_color(s_deu_time_h_layer, GColorClear);
+  text_layer_set_text_color(s_deu_time_h_layer, GColorWhite);
+  text_layer_set_text(s_deu_time_h_layer, "23");
+  text_layer_set_text_alignment(s_deu_time_h_layer, GTextAlignmentRight);
+
+  // Apply to TextLayer
+  text_layer_set_font(s_deu_time_h_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+
+  // Add it as a child layer to the Window's root layer
+  layer_add_child(window_layer, text_layer_get_layer(s_deu_time_h_layer));
+}
+
+void deinit_deu_time_h(void)
+{
+  // Destroy TextLayer
+  text_layer_destroy(s_deu_time_h_layer);
+}
+
+void init_deu_time_m(Layer *window_layer)
+{
+  // Create the TextLayer with specific bounds
+  s_deu_time_m_layer = text_layer_create(GRect(130, 105, 16, 18));
+
+  // Improve the layout to be more like a watchface
+  text_layer_set_background_color(s_deu_time_m_layer, GColorClear);
+  text_layer_set_text_color(s_deu_time_m_layer, GColorWhite);
+  text_layer_set_text(s_deu_time_m_layer, "59");
+  text_layer_set_text_alignment(s_deu_time_m_layer, GTextAlignmentLeft);
+
+  // Apply to TextLayer
+  text_layer_set_font(s_deu_time_m_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+
+  // Add it as a child layer to the Window's root layer
+  layer_add_child(window_layer, text_layer_get_layer(s_deu_time_m_layer));
+}
+
+void deinit_deu_time_m(void)
+{
+  // Destroy TextLayer
+  text_layer_destroy(s_deu_time_m_layer);
+}
+
 void init_time_layer(Layer *window_layer)
 {
   init_loc_time_h(window_layer);
@@ -256,6 +307,9 @@ void init_time_layer(Layer *window_layer)
   init_cal_day(window_layer);
   
   init_deu_flag(window_layer);
+  init_deu_time_h(window_layer);
+  init_deu_time_m(window_layer);
+  
   init_ind_flag(window_layer);
 }
 
@@ -270,5 +324,8 @@ void deinit_time_layer(void)
   deinit_cal_day();
   
   deinit_deu_flag();
+  deinit_deu_time_h();
+  deinit_deu_time_m();
+  
   deinit_ind_flag();
 }
