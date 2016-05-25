@@ -27,6 +27,18 @@ static GBitmap *s_ind_flag_bitmap;
 static TextLayer *s_ind_time_h_layer;
 static TextLayer *s_ind_time_m_layer;
 
+void upstr(char *str, int len)
+{
+  int i = 0;
+  
+  while(i < len) {
+    if(str[i] >= 'a' && str[i] <= 'z') {
+      str[i] = str[i] - 32;
+    }
+    i++;
+  }
+}
+
 void update_time(void) 
 {
   // Get a tm structure
@@ -39,6 +51,21 @@ void update_time(void)
   static char s_buf_deu_m[4];
   static char s_buf_ind_h[4];
   static char s_buf_ind_m[4];
+  
+  static char s_buf_month[4];
+  static char s_buf_date[4];
+  static char s_buf_day[4];
+  
+  // Write the current month, date and day into a buffer
+  strftime(s_buf_month, sizeof(s_buf_month),"%b", tick_time);
+  strftime(s_buf_date, sizeof(s_buf_date), "%d", tick_time);
+  strftime(s_buf_day, sizeof(s_buf_day), "%a", tick_time);
+  upstr(s_buf_month, sizeof(s_buf_month));
+  upstr(s_buf_day, sizeof(s_buf_day));
+  // Display this time on the TextLayer
+  text_layer_set_text(s_cal_month_layer, s_buf_month);
+  text_layer_set_text(s_cal_date_layer, s_buf_date);
+  text_layer_set_text(s_cal_day_layer, s_buf_day);
   
   // Write the current hours and minutes into a buffer
   strftime(s_buf_loc_h, sizeof(s_buf_loc_h), clock_is_24h_style() ? "%H" : "%I", tick_time);
@@ -159,7 +186,7 @@ void init_loc_time_h(Layer *window_layer)
   text_layer_set_background_color(s_loc_time_h_layer, GColorClear);
   text_layer_set_text_color(s_loc_time_h_layer, GColorWhite);
   text_layer_set_text(s_loc_time_h_layer, "09");
-  text_layer_set_text_alignment(s_loc_time_h_layer, GTextAlignmentRight);
+  text_layer_set_text_alignment(s_loc_time_h_layer, GTextAlignmentCenter);
 
   // Create GFont
   s_loc_time_h_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_70));
@@ -183,7 +210,7 @@ void deinit_loc_time_h(void)
 void init_loc_time_m(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_loc_time_m_layer = text_layer_create(GRect(55, -1, 60, 62));
+  s_loc_time_m_layer = text_layer_create(GRect(52, -1, 62, 62));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_loc_time_m_layer, GColorClear);
