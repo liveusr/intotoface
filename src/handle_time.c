@@ -8,6 +8,10 @@ static GFont s_loc_time_h_font;
 static TextLayer *s_loc_time_m_layer;
 static GFont s_loc_time_m_font;
 
+static TextLayer *s_cal_month_layer;
+static TextLayer *s_cal_date_layer;
+static TextLayer *s_cal_day_layer;
+
 static BitmapLayer *s_calendar_layer;
 static GBitmap *s_calendar_bitmap;
 
@@ -169,11 +173,88 @@ void deinit_loc_time_m(void)
   fonts_unload_custom_font(s_loc_time_m_font);
 }
 
+void init_cal_month(Layer *window_layer)
+{
+  // Create the TextLayer with specific bounds
+  s_cal_month_layer = text_layer_create(GRect(114, 24, 30, 20));
+
+  // Improve the layout to be more like a watchface
+  text_layer_set_background_color(s_cal_month_layer, GColorClear);
+  text_layer_set_text_color(s_cal_month_layer, GColorWhite);
+  text_layer_set_text(s_cal_month_layer, "MAY");
+  text_layer_set_text_alignment(s_cal_month_layer, GTextAlignmentCenter);
+
+  // Apply to TextLayer
+  text_layer_set_font(s_cal_month_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
+
+  // Add it as a child layer to the Window's root layer
+  layer_add_child(window_layer, text_layer_get_layer(s_cal_month_layer));
+}
+
+void deinit_cal_month(void)
+{
+  // Destroy TextLayer
+  text_layer_destroy(s_cal_month_layer);
+}
+
+void init_cal_date(Layer *window_layer)
+{
+  // Create the TextLayer with specific bounds
+  s_cal_date_layer = text_layer_create(GRect(114, 33, 30, 30));
+
+  // Improve the layout to be more like a watchface
+  text_layer_set_background_color(s_cal_date_layer, GColorClear);
+  text_layer_set_text_color(s_cal_date_layer, GColorBlack);
+  text_layer_set_text(s_cal_date_layer, "05");
+  text_layer_set_text_alignment(s_cal_date_layer, GTextAlignmentCenter);
+
+  // Apply to TextLayer
+  text_layer_set_font(s_cal_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+
+  // Add it as a child layer to the Window's root layer
+  layer_add_child(window_layer, text_layer_get_layer(s_cal_date_layer));
+}
+
+void deinit_cal_date(void)
+{
+  // Destroy TextLayer
+  text_layer_destroy(s_cal_date_layer);
+}
+
+void init_cal_day(Layer *window_layer)
+{
+  // Create the TextLayer with specific bounds
+  s_cal_day_layer = text_layer_create(GRect(114, 59, 30, 20));
+
+  // Improve the layout to be more like a watchface
+  text_layer_set_background_color(s_cal_day_layer, GColorClear);
+  text_layer_set_text_color(s_cal_day_layer, GColorWhite);
+  text_layer_set_text(s_cal_day_layer, "MON");
+  text_layer_set_text_alignment(s_cal_day_layer, GTextAlignmentCenter);
+
+  // Apply to TextLayer
+  text_layer_set_font(s_cal_day_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+
+  // Add it as a child layer to the Window's root layer
+  layer_add_child(window_layer, text_layer_get_layer(s_cal_day_layer));
+}
+
+void deinit_cal_day(void)
+{
+  // Destroy TextLayer
+  text_layer_destroy(s_cal_day_layer);
+}
+
 void init_time_layer(Layer *window_layer)
 {
   init_loc_time_h(window_layer);
   init_loc_time_m(window_layer);
+  
   init_calendar(window_layer);
+  init_cal_month(window_layer);
+  init_cal_date(window_layer);
+  init_cal_day(window_layer);
+  
   init_deu_flag(window_layer);
   init_ind_flag(window_layer);
 }
@@ -182,7 +263,12 @@ void deinit_time_layer(void)
 {
   deinit_loc_time_h();
   deinit_loc_time_m();
+  
   deinit_calendar();
+  deinit_cal_month();
+  deinit_cal_date();
+  deinit_cal_day();
+  
   deinit_deu_flag();
   deinit_ind_flag();
 }
