@@ -33,12 +33,43 @@ void update_time(void)
   time_t temp = time(NULL); 
   struct tm *tick_time = localtime(&temp);
 
+  static char s_buf_loc_h[4];
+  static char s_buf_loc_m[4];
+  static char s_buf_deu_h[4];
+  static char s_buf_deu_m[4];
+  static char s_buf_ind_h[4];
+  static char s_buf_ind_m[4];
+  
   // Write the current hours and minutes into a buffer
-  static char s_buffer[8];
-  strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
-
+  strftime(s_buf_loc_h, sizeof(s_buf_loc_h), clock_is_24h_style() ? "%H" : "%I", tick_time);
+  strftime(s_buf_loc_m, sizeof(s_buf_loc_m), clock_is_24h_style() ? ":%M" : ":%M", tick_time);
   // Display this time on the TextLayer
-  //text_layer_set_text(s_loc_time_h_layer, s_buffer);
+  text_layer_set_text(s_loc_time_h_layer, s_buf_loc_h);
+  text_layer_set_text(s_loc_time_m_layer, s_buf_loc_m);
+  
+  tick_time->tm_hour = (tick_time->tm_hour + 6) % 24;
+
+  // Write the current hours and minutes into a buffer
+  strftime(s_buf_deu_h, sizeof(s_buf_deu_h), clock_is_24h_style() ? "%H" : "%I", tick_time);
+  strftime(s_buf_deu_m, sizeof(s_buf_deu_m), clock_is_24h_style() ? "%M" : "%M", tick_time);
+  // Display this time on the TextLayer
+  text_layer_set_text(s_deu_time_h_layer, s_buf_deu_h);
+  text_layer_set_text(s_deu_time_m_layer, s_buf_deu_m);
+  
+  if(tick_time->tm_min >= 30) {
+    tick_time->tm_hour = (tick_time->tm_hour + 4) % 24;
+  }
+  else {
+    tick_time->tm_hour = (tick_time->tm_hour + 3) % 24;
+  }
+  tick_time->tm_min = (tick_time->tm_min + 30) % 60;
+  
+  // Write the current hours and minutes into a buffer
+  strftime(s_buf_ind_h, sizeof(s_buf_ind_h), clock_is_24h_style() ? "%H" : "%I", tick_time);
+  strftime(s_buf_ind_m, sizeof(s_buf_ind_m), clock_is_24h_style() ? "%M" : "%M", tick_time);
+  // Display this time on the TextLayer
+  text_layer_set_text(s_ind_time_h_layer, s_buf_ind_h);
+  text_layer_set_text(s_ind_time_m_layer, s_buf_ind_m);
 }
 
 static void init_calendar(Layer *window_layer)
@@ -152,7 +183,7 @@ void deinit_loc_time_h(void)
 void init_loc_time_m(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_loc_time_m_layer = text_layer_create(GRect(55, -1, 56, 62));
+  s_loc_time_m_layer = text_layer_create(GRect(55, -1, 60, 62));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_loc_time_m_layer, GColorClear);

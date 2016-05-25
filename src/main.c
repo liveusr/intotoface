@@ -11,7 +11,8 @@ static GBitmap *s_background_bitmap;
 
 static void tick_handler(struct tm *tick_time, TimeUnits units_changed) 
 {
-  //update_time();
+  update_time();
+  
   // Get weather update every 30 minutes
   if(tick_time->tm_min % 30 == 0) {
     //send_js_message(2);
@@ -21,7 +22,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 
 static void show_launch_sreen(void)
 {
-  //update_time();
+  update_time();
 }
 
 static void init_background_layer(Layer *window_layer)
@@ -91,7 +92,7 @@ static void init()
   js_interface_init();
   
   // Register with TickTimerService
-  tick_timer_service_subscribe(SECOND_UNIT, tick_handler);
+  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
 
   // Make sure the watchface is displayed from the start
   show_launch_sreen();
