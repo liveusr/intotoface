@@ -180,7 +180,7 @@ static void deinit_ind_flag(void)
 void init_loc_time_h(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_loc_time_h_layer = text_layer_create(GRect(4, -10+2, 54, 72));
+  s_loc_time_h_layer = text_layer_create(GRect(4, -8, 54, 72));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_loc_time_h_layer, GColorClear);
@@ -210,7 +210,7 @@ void deinit_loc_time_h(void)
 void init_loc_time_m(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_loc_time_m_layer = text_layer_create(GRect(54, -1+5, 60, 62));
+  s_loc_time_m_layer = text_layer_create(GRect(54, 4, 60, 62));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_loc_time_m_layer, GColorClear);

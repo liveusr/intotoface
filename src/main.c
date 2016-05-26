@@ -18,12 +18,13 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
   if(tick_time->tm_min % 30 == 0) {
     //send_js_message(2);
   }
-  //send_js_message(1);
+  send_js_message(1);
 }
 
 static void show_launch_sreen(void)
 {
   update_time();
+  battery_callback(battery_state_service_peek());
 }
 
 static void init_background_layer(Layer *window_layer)
