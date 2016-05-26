@@ -40,13 +40,13 @@
             },
             {
                 "file": "fonts/LEngineer-Regular.otf",
-                "name": "FONT_LENGINEER_70",
+                "name": "FONT_LENGINEER_56",
                 "targetPlatforms": null,
                 "type": "font"
             },
             {
                 "file": "fonts/LEngineer-Regular.otf",
-                "name": "FONT_LENGINEER_60",
+                "name": "FONT_LENGINEER_68",
                 "targetPlatforms": null,
                 "type": "font"
             },

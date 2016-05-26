@@ -109,7 +109,7 @@ static void init_calendar(Layer *window_layer)
   image_bounds = gbitmap_get_bounds(s_calendar_bitmap);
 
   // Create BitmapLayer to display the GBitmap
-  s_calendar_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 20, image_bounds.size.w, image_bounds.size.h));
+  s_calendar_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 17, image_bounds.size.w, image_bounds.size.h));
 
   // Set the bitmap onto the layer and add to the window
   bitmap_layer_set_bitmap(s_calendar_layer, s_calendar_bitmap);
@@ -135,7 +135,7 @@ static void init_deu_flag(Layer *window_layer)
   image_bounds = gbitmap_get_bounds(s_deu_flag_bitmap);
 
   // Create BitmapLayer to display the GBitmap
-  s_deu_flag_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 86, image_bounds.size.w, image_bounds.size.h));
+  s_deu_flag_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 85, image_bounds.size.w, image_bounds.size.h));
 
   // Set the bitmap onto the layer and add to the window
   bitmap_layer_set_bitmap(s_deu_flag_layer, s_deu_flag_bitmap);
@@ -161,7 +161,7 @@ static void init_ind_flag(Layer *window_layer)
   image_bounds = gbitmap_get_bounds(s_ind_flag_bitmap);
 
   // Create BitmapLayer to display the GBitmap
-  s_ind_flag_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 130, image_bounds.size.w, image_bounds.size.h));
+  s_ind_flag_layer = bitmap_layer_create(GRect(bounds.size.w - image_bounds.size.w, 129, image_bounds.size.w, image_bounds.size.h));
 
   // Set the bitmap onto the layer and add to the window
   bitmap_layer_set_bitmap(s_ind_flag_layer, s_ind_flag_bitmap);
@@ -180,16 +180,16 @@ static void deinit_ind_flag(void)
 void init_loc_time_h(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_loc_time_h_layer = text_layer_create(GRect(5, -10, 56, 72));
+  s_loc_time_h_layer = text_layer_create(GRect(4, -10+2, 54, 72));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_loc_time_h_layer, GColorClear);
   text_layer_set_text_color(s_loc_time_h_layer, GColorWhite);
-  text_layer_set_text(s_loc_time_h_layer, "09");
-  text_layer_set_text_alignment(s_loc_time_h_layer, GTextAlignmentCenter);
+  text_layer_set_text(s_loc_time_h_layer, "29");
+  text_layer_set_text_alignment(s_loc_time_h_layer, GTextAlignmentRight);
 
   // Create GFont
-  s_loc_time_h_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_70));
+  s_loc_time_h_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_68));
 
   // Apply to TextLayer
   text_layer_set_font(s_loc_time_h_layer, s_loc_time_h_font);
@@ -210,7 +210,7 @@ void deinit_loc_time_h(void)
 void init_loc_time_m(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_loc_time_m_layer = text_layer_create(GRect(52, -1, 62, 62));
+  s_loc_time_m_layer = text_layer_create(GRect(54, -1+5, 60, 62));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_loc_time_m_layer, GColorClear);
@@ -219,7 +219,7 @@ void init_loc_time_m(Layer *window_layer)
   text_layer_set_text_alignment(s_loc_time_m_layer, GTextAlignmentLeft);
 
   // Create GFont
-  s_loc_time_m_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_60));
+  s_loc_time_m_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_56));
 
   // Apply to TextLayer
   text_layer_set_font(s_loc_time_m_layer, s_loc_time_m_font);
@@ -240,7 +240,7 @@ void deinit_loc_time_m(void)
 void init_cal_month(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_cal_month_layer = text_layer_create(GRect(114, 24, 30, 20));
+  s_cal_month_layer = text_layer_create(GRect(114, 21, 30, 20));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_cal_month_layer, GColorClear);
@@ -264,7 +264,7 @@ void deinit_cal_month(void)
 void init_cal_date(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_cal_date_layer = text_layer_create(GRect(114, 33, 30, 30));
+  s_cal_date_layer = text_layer_create(GRect(114, 29, 30, 30));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_cal_date_layer, GColorClear);
@@ -288,7 +288,7 @@ void deinit_cal_date(void)
 void init_cal_day(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_cal_day_layer = text_layer_create(GRect(114, 59, 30, 20));
+  s_cal_day_layer = text_layer_create(GRect(114, 56, 30, 20));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_cal_day_layer, GColorClear);
@@ -312,7 +312,7 @@ void deinit_cal_day(void)
 void init_deu_time_h(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_deu_time_h_layer = text_layer_create(GRect(113, 105, 16, 18));
+  s_deu_time_h_layer = text_layer_create(GRect(113, 104, 16, 18));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_deu_time_h_layer, GColorClear);
@@ -336,7 +336,7 @@ void deinit_deu_time_h(void)
 void init_deu_time_m(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_deu_time_m_layer = text_layer_create(GRect(130, 105, 16, 18));
+  s_deu_time_m_layer = text_layer_create(GRect(130, 104, 16, 18));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_deu_time_m_layer, GColorClear);
@@ -360,7 +360,7 @@ void deinit_deu_time_m(void)
 void init_ind_time_h(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_ind_time_h_layer = text_layer_create(GRect(113, 149, 16, 18));
+  s_ind_time_h_layer = text_layer_create(GRect(113, 148, 16, 18));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_ind_time_h_layer, GColorClear);
@@ -384,7 +384,7 @@ void deinit_ind_time_h(void)
 void init_ind_time_m(Layer *window_layer)
 {
   // Create the TextLayer with specific bounds
-  s_ind_time_m_layer = text_layer_create(GRect(130, 149, 16, 18));
+  s_ind_time_m_layer = text_layer_create(GRect(130, 148, 16, 18));
 
   // Improve the layout to be more like a watchface
   text_layer_set_background_color(s_ind_time_m_layer, GColorClear);

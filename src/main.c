@@ -3,6 +3,7 @@
 #include "js_interface.h"
 #include "handle_time.h"
 #include "handle_weather.h"
+#include "handle_battery.h"
 
 static Window *s_main_window;
 
@@ -58,12 +59,16 @@ static void main_window_load(Window *window)
   
   init_time_layer(window_layer);
   
+  init_battery_layer(window_layer);
+  
   init_weather_layer(window_layer);
 }
 
 static void main_window_unload(Window *window) 
 {
   deinit_time_layer();
+  
+  deinit_battery_layer();
   
   deinit_weather_layer();
   

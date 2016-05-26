@@ -19,7 +19,7 @@ void init_weather_layer(Layer *window_layer)
   text_layer_set_text(s_weather_layer, "...");
 
   // Create second custom font, apply it and add to Window
-  s_weather_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_60));
+  //s_weather_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_LENGINEER_60));
   //text_layer_set_font(s_weather_layer, s_weather_font);
   text_layer_set_font(s_weather_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
   layer_add_child(window_layer, text_layer_get_layer(s_weather_layer));
